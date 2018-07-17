@@ -1,5 +1,5 @@
 export enum TransactionState {
-    PROCESSED = "PROCESSED",
+    PROCESSING = "PROCESSING",
     CANCELED = "CANCELED",
-    FINSIHED = "FINISHED"
+    FINISHED = "FINISHED"
 }

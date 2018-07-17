@@ -1,21 +1,69 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
 import {User} from "./entity/User";
+import {Transaction} from "./entity/Transaction";
+//import {UserTransaction} from "./entity/UserTransaction";
+import {TransactionState} from "./entity/TransactionState";
+import {Currency} from "./entity/Currency";
+import {Config} from "./config/config";
+import {getTransactionsByUser} from "./queries/transaction-queries";
+import * as express from "express";
 
-createConnection().then(async connection => {
+createConnection(Config.connectionConfig).then(async connection => {
 
-    console.log("Inserting a new user into the database...");
-    const user = new User();
-    user.name = "nana";
-    user.email = "blabla@bla.bla";
-    user.birthDay = new Date(1995, 6, 3);
-    await connection.manager.save(user);
-    console.log("Saved a new user with id: " + user.id);
-    
-    console.log("Loading users from the database...");
-    const users = await connection.manager.find(User);
-    console.log("Loaded users: ", users);
-     
-    console.log("Here you can setup and run express/koa/any other framework.");
+
+    await createMockData();
+    console.log("Connection initialized...");
+
+    getTransactionsByUser(1);
+
+
     
 }).catch(error => console.log(error));
+
+
+/*async function test() {
+    let user1 = await User.findOne(1);
+
+    let user2 = await User.findOne(3);
+
+
+    console.log("creating user transactions");
+    let userTransaction1 = new UserTransaction();
+    let userTransaction2 = new UserTransaction();
+
+    userTransaction1.user = user1;
+    userTransaction1.from = true;
+
+    userTransaction2.user = user2;
+    userTransaction2.from = false;
+
+    console.log("creating transaction");
+    let transaction = new Transaction();
+    transaction.currency = Currency.eth;
+    transaction.state = TransactionState.PROCESSING;
+    transaction.amount = 0.87;
+    transaction.users = [userTransaction1, userTransaction2];
+
+    console.log("before saving");
+    await Transaction.save(transaction);
+}*/
+
+
+async function createMockData() {
+    let user1 = await User.findOne(1);
+
+    let user2 = await User.findOne(2);
+
+    console.log("creating transaction");
+    let transaction = new Transaction();
+    transaction.currency = Currency.eth;
+    transaction.state = TransactionState.PROCESSING;
+    transaction.amount = 0.87;
+    transaction.source = user2;
+    transaction.target = user1;
+
+    console.log("before saving");
+    await Transaction.save(transaction);
+
+}

@@ -1,17 +1,21 @@
-import {User} from "./User";
 import {TransactionState} from "./TransactionState";
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
-import {UserTransaction} from "./UserTransaction";
+import {
+    BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
+//import {UserTransaction} from "./UserTransaction";
+import {Currency} from "./Currency";
+import {User} from "./User";
 
 @Entity()
-export class Transaction {
+export class Transaction extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column("decimal", {precision: 10, scale: 3})
     amount: number;
 
-    @Column()
+    @Column(/*"enum", {enum: Currency}*/)
     currency: string;
 
     @CreateDateColumn({type: "timestamp"})
@@ -20,9 +24,23 @@ export class Transaction {
     @UpdateDateColumn({type: "timestamp"})
     processed: Date;
 
-    @Column("enum", {enum: TransactionState})
-    state: TransactionState;
+    @ManyToOne(type => User, user => user.sourceTransactionHistory)
+    @JoinColumn({ name: "sourceId" })
+    source: User;
 
-    @OneToMany(type => UserTransaction, userTransaction => userTransaction.transaction)
-    users: UserTransaction[];
+    @Column({ nullable: false })
+    sourceId: number;
+
+    @ManyToOne(type => User, user => user.targetTransactionHistory)
+    @JoinColumn({ name: "targetId" })
+    target: User;
+
+    @Column({ nullable: false })
+    targetId: number;
+
+    @Column(/*"enum", {enum: TransactionState}*/)
+    state: string;
+
+    /*@OneToMany(type => UserTransaction, userTransaction => userTransaction.transaction, {cascade: true})
+    users: UserTransaction[];*/
 }

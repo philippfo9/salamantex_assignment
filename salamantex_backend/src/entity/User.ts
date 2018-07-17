@@ -1,9 +1,10 @@
-import {Column, Entity, Generated, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, Generated, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Max, Min} from "class-validator";
-import {UserTransaction} from "./UserTransaction";
+import {Transaction} from "./Transaction";
+//import {UserTransaction} from "./UserTransaction";
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -61,8 +62,14 @@ export class User {
     })
     maximumAmountPerTransaction: number;
 
-    @Column()
-    @OneToMany(type => UserTransaction, userTransaction => userTransaction.user)
-    userTransactions: UserTransaction[];
+    @OneToMany(type => Transaction, transaction => transaction.source)
+    sourceTransactionHistory: Transaction[];
+
+    @OneToMany(type => Transaction, transaction => transaction.target)
+    targetTransactionHistory: Transaction[];
+
+    /*@OneToMany(type => UserTransaction, userTransaction => userTransaction.user)
+    transactionHistory: UserTransaction[];*/
+
 
 }

@@ -1,20 +1,18 @@
 import {User} from "./User";
 import {Transaction} from "./Transaction";
-import {Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm";
 
-@Entity()
-export class UserTransaction {
-    @PrimaryGeneratedColumn()
-    id: number;
+/*@Entity()
+export class UserTransaction extends BaseEntity{
 
-    @ManyToOne(type => User, user => user.userTransactions)
+    @ManyToOne(type => User, user => user.transactionHistory, {primary: true})
     user: User;
 
-    @ManyToOne(type => Transaction, transaction => transaction.users)
+    @ManyToOne(type => Transaction, transaction => transaction.users,{primary: true})
     transaction: Transaction;
 
     @Column({
         nullable: false
     })
     from: boolean;
-}
+}*/
