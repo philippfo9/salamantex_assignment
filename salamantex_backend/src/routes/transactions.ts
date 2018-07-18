@@ -2,20 +2,23 @@ import {Request, Response} from "express";
 import {getConnection, Repository} from "typeorm";
 import {Transaction} from "../entity/Transaction";
 import {TransactionDomain} from "../domain/transactions";
+import {TransactionState} from "../entity/TransactionState";
+import {transactionProcessor} from "../index";
 
 
 export class TransactionRoutes {
-    async getTransactionById(req: Request, res: Response) {
-        return this.transactionDomain.getTrxById(req.params.id);
+    static async getTransactionById(req: Request, res: Response) {
+        res.send(await TransactionDomain.getTrxById(req.params.id));
     }
 
-    async getTransactionsByUser(req: Request, res: Response) {
-        return this.transactionDomain.trxByUser(req.params.userId);
+    static async getTransactionsByUser(req: Request, res: Response) {
+        res.send(await TransactionDomain.trxByUser(req.params.userId));
     }
 
-
-    constructor(public transactionDomain: TransactionDomain) {
-
+    static async submitTransaction(req: Request, res: Response) {
+        let trx = req.body;
+        trx.sourceId = req.user.id;
+        res.send(await TransactionDomain.submitTransaction(trx));
     }
 }
 

@@ -1,20 +1,26 @@
 import {Application} from "express";
 import {TransactionRoutes} from "./transactions";
-import {TransactionDomain} from "../domain/transactions";
+import {Auth} from "./auth";
+import Router from "express-promise-router";
+import {UserRoutes} from "./users";
 
 
-export class Routes {
-    transactionRoutes: TransactionRoutes;
-    assignRoutes(app: Application) {
-        app.get("/transactions/:id", this.transactionRoutes.getTransactionById);
-
-        app.get("/users/:userId/transactions", this.transactionRoutes.getTransactionsByUser);
+const unprotectedRoutes = Router();
+const protectedRoutes = Router();
 
 
+unprotectedRoutes.get("/transactions/:id", TransactionRoutes.getTransactionById);
 
-    }
+unprotectedRoutes.get("/users/:userId/transactions", TransactionRoutes.getTransactionsByUser);
 
-    constructor() {
-        this.transactionRoutes = new TransactionRoutes(new TransactionDomain())
-    }
-}
+unprotectedRoutes.post("/login", Auth.login);
+
+unprotectedRoutes.post("/register", Auth.register);
+
+protectedRoutes.get("/user", UserRoutes.getUserProfile);
+
+protectedRoutes.post("/user/:id", UserRoutes.updateUser);
+
+protectedRoutes.post("/transactions", TransactionRoutes.submitTransaction);
+
+export{protectedRoutes, unprotectedRoutes};

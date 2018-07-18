@@ -1,5 +1,8 @@
 import {ConnectionOptions} from "typeorm";
 
+const jwtsecret = "jwtsecret_for_salamantex#";
+export {jwtsecret};
+
 export class Config {
     public static connectionConfig: ConnectionOptions = {
         type: "mysql",

@@ -38,6 +38,8 @@ export class Transaction extends BaseEntity {
     @Column({ nullable: false })
     targetId: number;
 
+    targetPublicId: string;
+
     @Column(/*"enum", {enum: TransactionState}*/)
     state: string;
 
