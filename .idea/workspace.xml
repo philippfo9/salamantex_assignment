@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8676b0f2-523b-4b4f-aa53-e129c7476291" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/README.md" afterPath="$PROJECT_DIR$/salamantex_backend/README.md" />
-    </list>
+    <list default="true" id="8676b0f2-523b-4b4f-aa53-e129c7476291" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -438,12 +436,12 @@
       <updated>1531650495814</updated>
       <workItem from="1531650497254" duration="45916000" />
       <workItem from="1532011163851" duration="14050000" />
-      <workItem from="1532088235112" duration="26860000" />
+      <workItem from="1532088235112" duration="26992000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86826000" />
+    <option name="totallyTimeSpent" value="86958000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
