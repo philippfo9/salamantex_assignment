@@ -1,0 +1,48 @@
+register-form {
+  .grid {
+    .row {
+      ion-input {
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        padding: 2px 5px;
+        .text-input {
+          margin-left: 8px;
+        }
+      }
+      .label {
+        margin: 0px 0px 2px 3px;
+        font-size: 1rem;
+        letter-spacing: 0.4px;
+        &.invalidText {
+          color: #a52e2e;
+          margin-top: 1px;
+          white-space: normal;
+        }
+      }
+      .checkboxCol {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .checkbox {
+          .checkbox-icon {
+            width: 15px;
+            height: 15px;
+            .checkbox-inner {
+              height: 8px;
+              left: 4px;
+              top: 2px;
+            }
+          }
+        }
+        .label {
+          margin: 0px 0px 0px 10px;
+          white-space: normal;
+          color: #363636;
+          display: flex;
+          span {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+  }
+}

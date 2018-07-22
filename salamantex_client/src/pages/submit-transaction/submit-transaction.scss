@@ -1,0 +1,41 @@
+submit-transaction {
+  .row {
+    margin: 20px 5px;
+    .toolbar-title {
+      color: #488aff;
+    }
+    .spinner {
+      position: unset;
+    }
+  }
+  .bigDisplay {
+    display: none;
+  }
+  .button {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  submit-transaction {
+    .row {
+      .col {
+        .label {
+          font-size: 1.4rem;
+        }
+        &.centeredContent {
+          align-items: flex-start;
+          justify-content: flex-start;
+        }
+      }
+    }
+    .smallDisplay {
+      display: none;
+    }
+    .bigDisplay {
+      display: flex;
+    }
+  }
+}
+
+

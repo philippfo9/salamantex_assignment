@@ -1,0 +1,10 @@
+<ion-content padding>
+  <ion-grid>
+    <ion-list>
+      <ion-item *ngFor="let transaction of transactionService.transactions">
+        <transaction-item [transaction]="transaction" [reasonEnabled]="false" (transactionClicked)="selectTransaction(transaction)"></transaction-item>
+      </ion-item>
+    </ion-list>
+    <loading></loading>
+  </ion-grid>
+</ion-content>

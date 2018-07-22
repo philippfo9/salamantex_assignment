@@ -1,0 +1,24 @@
+<ion-row *ngIf="transaction">
+  <ion-col col-24 (tap)="selectTransaction()">
+    <ion-title text-center>Transaktion #{{transaction.id}}</ion-title>
+  </ion-col>
+  <ion-col col-24 col-sm-11 class="centeredContent userTextCol">
+    <span ion-text text-center class="userText">{{transaction.source.publicIdentifier}}</span>
+  </ion-col>
+  <ion-col col-24 col-sm-2 class="centeredContent">
+    <ion-icon ios="ios-arrow-round-forward" md="ios-arrow-round-forward" color="light-grey"></ion-icon>
+  </ion-col>
+  <ion-col col-24 col-sm-11 class="centeredContent userTextCol right">
+    <span ion-text text-center class="userText">{{transaction.target.publicIdentifier}}</span>
+  </ion-col>
+  <ion-col col-24 class="centeredContent">
+    <div class="stateInfoLine" [style.background-color]="transaction.getStateColor()"></div>
+    <span class="stateInfoText">{{transaction.getStateText()}}</span>
+  </ion-col>
+  <ion-col col-24 class="centeredContent" *ngIf="transaction.state.toLowerCase()=='canceled' && reasonEnabled">
+    <span class="cancelReason">Abbruchgrund: {{transaction.cancelReason}}</span>
+  </ion-col>
+  <ion-col col-24 class="centeredContent">
+    <button ion-button round outline (click)="loadTrx($event)">Status neu laden</button>
+  </ion-col>
+</ion-row>

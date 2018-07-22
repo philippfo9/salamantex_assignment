@@ -1,0 +1,28 @@
+<ion-split-pane when="lg">
+  <ion-menu [content]="content">
+    <ion-content class="menuContent">
+
+      <ion-grid class="navigationGrid">
+        <ion-row *ngFor="let page of pages">
+          <ion-col col-11 offset-1 class="centeredContent">
+            <p (click)="navigateTo(page)" [class.selected]="page.selected" class="navigationTitle">{{page.title}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isLoggedIn">
+          <ion-col col-11 offset-1 class="centeredContent">
+            <p (click)="generatePdf()" class="navigationTitle">Produktübersicht PDF</p>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isLoggedIn">
+          <ion-col col-11 offset-1>
+            <button ion-button class="standardBtn" (click)="logout()">Logout</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+
+  </ion-menu>
+
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>
+</ion-split-pane>

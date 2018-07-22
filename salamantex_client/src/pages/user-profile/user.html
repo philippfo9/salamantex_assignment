@@ -1,0 +1,81 @@
+<ion-content>
+	<form [formGroup]='UserForm'>
+	<ion-grid>
+		<ion-row class='itemRow' *ngIf="!profileLoading">
+        <ion-col col-24>
+          <ion-title>Kontaktdaten</ion-title>
+        </ion-col>
+				<ion-col col-24 col-sm-12>
+					<ion-label text-center>Public-Key</ion-label>
+					<input-disabled [text]="userService.user.publicIdentifier"></input-disabled>
+				</ion-col>
+				<ion-col col-24 col-sm-12 col-lg-6>
+					<ion-label text-center>Email</ion-label>
+					<input-disabled [text]='userService.user.email'></input-disabled>
+				</ion-col>
+				<ion-col col-24 col-sm-12 col-lg-6>
+					<ion-label text-center>Username</ion-label>
+					<input-disabled [text]='userService.user.name'></input-disabled>
+				</ion-col>
+        <ion-col col-24>
+          <ion-title>Persönliche Angaben</ion-title>
+        </ion-col>
+				<ion-col col-24 class='centeredContent'>
+          <ion-row>
+            <ion-col col-24 col-sm-12 no-padding>
+              <ion-label text-center>Beschreibung</ion-label>
+              <ion-textarea [disabled]="!editMode" type='text' [(ngModel)]='userService.user.description' formControlName='description' placeholder='Deine Beschreibung' ></ion-textarea>
+            </ion-col>
+            <ion-col col-24 col-sm-12 no-padding>
+              <ion-row>
+                <ion-col class="birthDayCol padding-min" col-24>
+                  <ion-label text-center>Dein Geburtstag</ion-label>
+                  <ion-datetime displayFormat='DD.MMM.YYYY' formControlName='birthDay' placeholder="z.B. 13.04.1995" [(ngModel)]='userService.user.birthDay'></ion-datetime>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="padding-min" col-24>
+                  <ion-label text-center>Maximale Menge per Transaktion</ion-label>
+                  <ion-input [disabled]="!editMode" type='number' [(ngModel)]='userService.user.maximumAmountPerTransaction' formControlName='maximumAmountPerTransaction'  ></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+				</ion-col>
+        <ion-col col-24>
+          <ion-title>Wallets</ion-title>
+        </ion-col>
+				<ion-col col-24 col-sm-12>
+					<ion-label text-center>Bitcoin Wallet Adresse</ion-label>
+					<ion-input [disabled]="!editMode" type='text' [(ngModel)]='userService.user.bitcoinWalletID' formControlName='bitcoinWalletID' placeholder="Deine Bitcoin Wallet Adresse"></ion-input>
+				</ion-col>
+				<ion-col col-24 col-sm-12>
+					<ion-label text-center>Bitcoin Wallet Balance</ion-label>
+          <input-disabled [text]='userService.user.bitcoinBalance'></input-disabled>
+				</ion-col>
+				<ion-col col-24 col-sm-12>
+					<ion-label text-center>Ethereum Wallet Adresse</ion-label>
+					<ion-input [disabled]="!editMode" type='text' [(ngModel)]='userService.user.ethereumWalletID' formControlName='ethereumWalletID' placeholder="Deine Ethereum Wallet Adresse"></ion-input>
+				</ion-col>
+				<ion-col col-24 col-sm-12>
+					<ion-label text-center>Ethereum Wallet Balance</ion-label>
+					<input-disabled [text]="userService.user.ethereumBalance"></input-disabled>
+				</ion-col>
+		</ion-row>
+    <ion-row *ngIf="profileLoading">
+      <ion-spinner name="crescent"></ion-spinner>
+    </ion-row>
+	</ion-grid>
+	</form>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-24>
+        <button ion-button class="standardBtn" (click)="saveUpdates()" *ngIf="editMode">Speichern</button>
+        <button ion-button class="standardBtn" (click)="cancelEditMode()" *ngIf="editMode">Abbrechen</button>
+        <button ion-button class="standardBtn" (click)="activateEditMode()" *ngIf="!editMode">Bearbeiten</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

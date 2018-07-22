@@ -1,0 +1,11 @@
+<ion-content padding>
+  <ion-grid>
+    <transaction-item [transaction]="transactionService.selectedTransaction" [trxId]="this.navParams.get('id')" [reasonEnabled]="true"></transaction-item>
+    <ion-row>
+      <ion-col col-24>
+        <button ion-button clear (click)="navigateBackToTransactions()">Zur Transaktionsübersicht</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

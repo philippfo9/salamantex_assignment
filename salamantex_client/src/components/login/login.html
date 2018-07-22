@@ -1,0 +1,27 @@
+<form [formGroup]="loginFormGroup">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-24 col-sm-16 offset-sm-4 col-lg-12 offset-lg-6>
+        <ion-label>Email</ion-label>
+        <ion-input [(ngModel)]="user.email" formControlName="email" placeholder="max.mustermann@mustermann.at" type="email"></ion-input>
+        <ion-label class="invalidText" *ngIf="invalidMarker && (!loginFormGroup.get('email').valid)">Email nicht korrekt</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-24 col-sm-16 offset-sm-4 col-lg-12 offset-lg-6>
+        <ion-label>Passwort</ion-label>
+        <ion-input [(ngModel)]="user.password" formControlName="password" placeholder="Passwort" [type]="user.showPassword?'text':'password'"></ion-input>
+        <ion-label class="invalidText" *ngIf="invalidMarker && (!loginFormGroup.get('password').valid)">Passwort nicht korrekt</ion-label>
+      </ion-col>
+      <ion-col col-24 col-sm-16 offset-sm-4 col-lg-12 offset-lg-6 class="checkboxCol">
+        <ion-checkbox [(ngModel)]="user.showPassword" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+        <ion-label>Passwort anzeigen?</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-24 col-sm-16 offset-sm-4 col-lg-12 offset-lg-6>
+        <button ion-button class="standardBtn" full (click)="standardLogin()">Login</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
