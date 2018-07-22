@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8676b0f2-523b-4b4f-aa53-e129c7476291" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_assignment_workjournal.xlsx" afterPath="$PROJECT_DIR$/salamantex_assignment_workjournal.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_client" afterPath="$PROJECT_DIR$/salamantex_client" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/salamantex_assignment.iml" afterPath="$PROJECT_DIR$/.idea/salamantex_assignment.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/Transaction.ts" afterPath="$PROJECT_DIR$/model/Transaction.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/User.ts" afterPath="$PROJECT_DIR$/model/User.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/package-lock.json" afterPath="$PROJECT_DIR$/salamantex_backend/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/package.json" afterPath="$PROJECT_DIR$/salamantex_backend/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/app.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/app.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/config/passport.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/config/passport.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/domain/transaction-processor.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/domain/transaction-processor.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/domain/transactions.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/domain/transactions.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/domain/users.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/domain/users.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/entity/Transaction.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/entity/Transaction.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/entity/User.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/entity/User.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/routes/auth.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/routes/auth.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/routes/routes.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/routes/routes.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/routes/transactions.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/routes/transactions.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/routes/users.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/routes/users.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/salamantex_backend/src/tools/CustomError.ts" afterPath="$PROJECT_DIR$/salamantex_backend/src/tools/CustomError.ts" />
-    </list>
+    <list default="true" id="8676b0f2-523b-4b4f-aa53-e129c7476291" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
