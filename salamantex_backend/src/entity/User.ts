@@ -3,6 +3,7 @@ import {IsDefined, Length, Max, MaxLength, Min} from "class-validator";
 import {Transaction} from "./Transaction";
 import {CustomError} from "../tools/CustomError";
 import * as bcrypt from "bcrypt-nodejs";
+import {Exclude} from "class-transformer";
 
 @Entity()
 export class User extends BaseEntity {
@@ -24,6 +25,7 @@ export class User extends BaseEntity {
     name: string;
 
     @Column()
+    @Exclude()
     password: string;
 
     @Column({

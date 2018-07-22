@@ -17,6 +17,8 @@ unprotectedRoutes.post("/login", Auth.login);
 
 unprotectedRoutes.post("/register", Auth.register);
 
+unprotectedRoutes.get("/user/:id", UserRoutes.getBasicUserProfile);
+
 protectedRoutes.get("/user", UserRoutes.getUserProfile);
 
 protectedRoutes.post("/user/:id", UserRoutes.updateUser);

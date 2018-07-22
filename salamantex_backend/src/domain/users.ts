@@ -4,6 +4,7 @@ import {User} from "../entity/User";
 import {Utils} from "../tools/utils";
 import {CustomError} from "../tools/CustomError";
 import {validate} from "class-validator";
+import {getBasicUserById} from "../queries/user-queries";
 
 @Injectable()
 export class UsersDomain {
@@ -12,8 +13,12 @@ export class UsersDomain {
     static async getUser(userId) {
         if(!UsersDomain.userRepository) UsersDomain.userRepository = getConnection().manager.getRepository(User);
         let user = await this.userRepository.findOneOrFail(userId);
-        delete user.password;
         return user;
+    }
+
+    static async getBasicUser(userId) {
+        if(!UsersDomain.userRepository) UsersDomain.userRepository = getConnection().manager.getRepository(User);
+        return await getBasicUserById(userId);
     }
 
     static async saveUser(user: User) {
@@ -23,9 +28,27 @@ export class UsersDomain {
             console.log("one or more field were not filled correctly", errors);
             throw new CustomError(422, "Eines oder mehrere Felder sind nicht korrekt ausgefüllt");
         }
-        let savedUser = await this.userRepository.save(user);
+        let savedUser = <User>await this.userRepository.save(user).catch(err => {
+            throw new CustomError(422, "Etwas ist schief gelaufen");
+        });
         delete savedUser.password;
         return savedUser;
+    }
+
+    static async postUser(user: User) {
+        if(!user.password)
+            throw new CustomError(422, "Für die Registrierung wird ein Passwort benötigt");
+
+        if(User.findOne({email: user.email})) {
+            throw new CustomError(422, "Email existiert bereits");
+        }
+
+        if(User.findOne({name: user.name})) {
+            throw new CustomError(422, "Username existiert bereits");
+        }
+
+        user.password = <string> await User.hashPassword(user.password);
+        return await UsersDomain.saveUser(user);
     }
 
     static async updateUser(user: User) {

@@ -43,6 +43,9 @@ export class Transaction extends BaseEntity {
     @Column(/*"enum", {enum: TransactionState}*/)
     state: string;
 
+    @Column({nullable: true})
+    cancelReason: string;
+
     /*@OneToMany(type => UserTransaction, userTransaction => userTransaction.transaction, {cascade: true})
     users: UserTransaction[];*/
 }

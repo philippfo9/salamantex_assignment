@@ -15,7 +15,7 @@ export class Auth {
             req.login(user, {session: false}, (err) => {
                 if(err) {res.send(err);}
                 delete user.password;
-                let token = jwt.sign(Object.assign({}, user), jwtsecret);
+                let token = jwt.sign(user.id, jwtsecret);
                 res.send({token: token});
             })
         })(req, res);
@@ -24,10 +24,6 @@ export class Auth {
     static async register(req: Request, res: Response) {
         let newUser: User = req.body;
 
-        if(!newUser.password)
-            throw new CustomError(422, "Für die Registrierung wird ein Passwort benötigt");
-
-        newUser.password = <string> await User.hashPassword(newUser.password);
-        res.send(await UsersDomain.saveUser(newUser));
+        res.send(await UsersDomain.postUser(newUser));
     }
 }

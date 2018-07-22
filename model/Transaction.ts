@@ -8,13 +8,13 @@ export class Transaction {
 
     currency: string;
 
-    sourceUser: User;
+    source: User;
 
-    targetUser: User;
+    target: User;
 
     created: Date;
 
     processed: Date;
 
-    state: TransactionState
+    state: string;
 }

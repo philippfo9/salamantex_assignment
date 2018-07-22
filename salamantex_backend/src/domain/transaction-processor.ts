@@ -5,6 +5,7 @@ import {UsersDomain} from "./users";
 import {Currency} from "../entity/Currency";
 import {TransactionState} from "../entity/TransactionState";
 import {CustomError} from "../tools/CustomError";
+import {User} from "../entity/User";
 
 export class TransactionProcessor {
     transactionQueue: BeeQueue;
@@ -29,6 +30,18 @@ export class TransactionProcessor {
         let targetUser = await UsersDomain.getUser(transaction.targetId);
         sourceUser.processUserAfterRead();
         targetUser.processUserAfterRead();
+
+        if(!this.validateUsersBeforeTransactionAndAdjust(transaction, sourceUser, targetUser))
+            transaction.state = TransactionState.CANCELED;
+
+        TransactionDomain.saveTransaction(transaction);
+        UsersDomain.saveUser(sourceUser);
+        UsersDomain.saveUser(targetUser);
+        return transaction;
+    }
+
+    private validateUsersBeforeTransactionAndAdjust(transaction: Transaction, sourceUser: User, targetUser: User) {
+        transaction.amount = Number(transaction.amount);
         //more currencies -> user with decorator pattern with currency accounts
         if(sourceUser.maximumAmountPerTransaction > transaction.amount && targetUser.maximumAmountPerTransaction > transaction.amount) {
             if(transaction.currency == Currency.eth) {
@@ -36,25 +49,20 @@ export class TransactionProcessor {
                     sourceUser.ethereumBalance = sourceUser.removeAmountFromBalance(sourceUser.ethereumBalance, transaction.amount);
                     targetUser.ethereumBalance = sourceUser.addAmountToBalance(targetUser.ethereumBalance, transaction.amount);
                     transaction.state = TransactionState.FINISHED;
+                    return true;
                 }
             } else {
                 if(sourceUser.bitcoinWalletID != null && sourceUser.bitcoinBalance > transaction.amount && targetUser.bitcoinWalletID) {
                     sourceUser.bitcoinBalance = sourceUser.removeAmountFromBalance(sourceUser.bitcoinBalance, transaction.amount);
                     targetUser.bitcoinBalance = sourceUser.addAmountToBalance(targetUser.bitcoinBalance, transaction.amount);
-                    transaction.state = TransactionState.FINISHED;
+                    return true;
                 }
             }
+            transaction.cancelReason = "Konto existiert nicht oder Kontostand ist kleiner als Transaktionsmenge";
         }
-
-
-        if(transaction.state != TransactionState.FINISHED)
-            transaction.state = TransactionState.CANCELED;
-
-        TransactionDomain.saveTransaction(transaction);
-        UsersDomain.saveUser(sourceUser);
-        UsersDomain.saveUser(targetUser);
-        console.log("transaction processed", transaction);
-        return transaction;
+        if(!transaction.cancelReason)
+            transaction.cancelReason = "Transaktionsmenge überschreitet maximale Transaktionsmenge";
+        return false;
     }
 
 

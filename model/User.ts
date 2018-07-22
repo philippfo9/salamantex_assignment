@@ -11,7 +11,7 @@ export class User {
 
     lastName: string;
 
-    age: number;
+    birthDay: Date;
 
     description: string;
 
@@ -26,8 +26,6 @@ export class User {
     ethereumBalance: number;
 
     maximumAmountPerTransaction: number;
-
-    transactionHistory: Transaction[];
 
 }
 

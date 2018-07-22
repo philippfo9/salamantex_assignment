@@ -18,7 +18,9 @@ export class TransactionRoutes {
     static async submitTransaction(req: Request, res: Response) {
         let trx = req.body;
         trx.sourceId = req.user.id;
-        res.send(await TransactionDomain.submitTransaction(trx));
+        trx = await TransactionDomain.submitTransaction(trx);
+        console.log("res send trx");
+        res.send(trx);
     }
 }
 

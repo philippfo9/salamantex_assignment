@@ -34,7 +34,9 @@ export class TransactionDomain {
             transaction.targetId = targetUser.id;
             transaction.state = TransactionState.PROCESSING;
             await this.saveTransaction(transaction);
+            console.log("trx saved");
             transactionProcessor.addTransaction(transaction);
+            console.log("returning trx", transaction);
             return transaction;
         } else {
             throw new CustomError(422, "Transaktionen können nicht bearbeitet werden");

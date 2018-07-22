@@ -28,7 +28,7 @@ passport.use(new jwtStrategy({
         jwtFromRequest: extractJWT.fromAuthHeaderAsBearerToken(),
         secretOrKey: jwtsecret
     }, (jwtPayload, done) => {
-        return User.findOne(jwtPayload.id)
+        return User.findOne(jwtPayload)
             .then(user => {
                 done(null, user);
             })

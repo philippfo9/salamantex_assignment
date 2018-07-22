@@ -9,10 +9,13 @@ export class UserRoutes {
     }
 
     static async updateUser(req: Request, res: Response) {
-        console.log("reqUser", req.user);
         if(req.params.id != req.user.id) { throw new CustomError(403, "Sie können nur Ihre eigenen User-Daten updaten"); }
         let user = req.body;
         res.send(await UsersDomain.updateUser(user));
+    }
+
+    static async getBasicUserProfile(req: Request, res: Response) {
+        res.send(await UsersDomain.getBasicUser(req.params.id));
     }
 
 
