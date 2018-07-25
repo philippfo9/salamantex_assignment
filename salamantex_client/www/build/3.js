@@ -345,7 +345,7 @@ var TransactionItemComponent = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__model_Transaction__["a" /* Transaction */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__model_Transaction__["a" /* Transaction */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__model_Transaction__["a" /* Transaction */])
     ], TransactionItemComponent.prototype, "transaction", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
@@ -363,10 +363,9 @@ var TransactionItemComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'transaction-item',template:/*ion-inline-start:"/Users/philipp/Documents/Projects/programs/salamantex_assignment/salamantex_client/src/components/transaction-item/transaction-item.html"*/'<ion-row *ngIf="transaction">\n  <ion-col col-24 (tap)="selectTransaction()">\n    <ion-title text-center>Transaktion #{{transaction.id}}</ion-title>\n  </ion-col>\n  <ion-col col-24 col-sm-11 class="centeredContent userTextCol">\n    <span ion-text text-center class="userText">{{transaction.source.publicIdentifier}}</span>\n  </ion-col>\n  <ion-col col-24 col-sm-2 class="centeredContent">\n    <ion-icon ios="ios-arrow-round-forward" md="ios-arrow-round-forward" color="light-grey"></ion-icon>\n  </ion-col>\n  <ion-col col-24 col-sm-11 class="centeredContent userTextCol right">\n    <span ion-text text-center class="userText">{{transaction.target.publicIdentifier}}</span>\n  </ion-col>\n  <ion-col col-24 class="centeredContent">\n    <div class="stateInfoLine" [style.background-color]="transaction.getStateColor()"></div>\n    <span class="stateInfoText">{{transaction.getStateText()}}</span>\n  </ion-col>\n  <ion-col col-24 class="centeredContent" *ngIf="transaction.state.toLowerCase()==\'canceled\' && reasonEnabled">\n    <span class="cancelReason">Abbruchgrund: {{transaction.cancelReason}}</span>\n  </ion-col>\n  <ion-col col-24 class="centeredContent">\n    <button ion-button round outline (click)="loadTrx($event)">Status neu laden</button>\n  </ion-col>\n</ion-row>\n'/*ion-inline-end:"/Users/philipp/Documents/Projects/programs/salamantex_assignment/salamantex_client/src/components/transaction-item/transaction-item.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_transactions_transactions__["a" /* TransactionsProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_transactions_transactions__["a" /* TransactionsProvider */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_transactions_transactions__["a" /* TransactionsProvider */]])
     ], TransactionItemComponent);
     return TransactionItemComponent;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=transaction-item.js.map
@@ -399,10 +398,9 @@ var LoadingComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'loading',template:/*ion-inline-start:"/Users/philipp/Documents/Projects/programs/salamantex_assignment/salamantex_client/src/components/loading/loading.html"*/'<ion-row *ngIf="loadingState.isLoading">\n  <ion-col col-24 class="centeredContent">\n    <ion-spinner></ion-spinner>\n  </ion-col>\n</ion-row>\n'/*ion-inline-end:"/Users/philipp/Documents/Projects/programs/salamantex_assignment/salamantex_client/src/components/loading/loading.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__providers_loading_state_loading_state__["a" /* LoadingStateProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__providers_loading_state_loading_state__["a" /* LoadingStateProvider */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_loading_state_loading_state__["a" /* LoadingStateProvider */]])
     ], LoadingComponent);
     return LoadingComponent;
-    var _a;
 }());
 
 //# sourceMappingURL=loading.js.map
@@ -495,7 +493,8 @@ var RegisterPage = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.userService.register()];
                     case 1:
                         success = _a.sent();
-                        if (success.register) {
+                        console.log(success);
+                        if (success && success.register) {
                             if (success.login) {
                                 this.navCtrl.push("UserProfileComponent");
                             }
@@ -513,10 +512,10 @@ var RegisterPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-register',template:/*ion-inline-start:"/Users/philipp/Documents/Projects/programs/salamantex_assignment/salamantex_client/src/pages/register/register.html"*/'\n\n<ion-content padding>\n  <register-form [user]="userService.user" (registerEvent)="register()"></register-form>\n</ion-content>\n'/*ion-inline-end:"/Users/philipp/Documents/Projects/programs/salamantex_assignment/salamantex_client/src/pages/register/register.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_user_user__["a" /* UserProvider */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_standards_standards__["a" /* StandardsProvider */], __WEBPACK_IMPORTED_MODULE_4__app_app_component__["a" /* MyApp */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_user_user__["a" /* UserProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_user_user__["a" /* UserProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__providers_standards_standards__["a" /* StandardsProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_standards_standards__["a" /* StandardsProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__app_app_component__["a" /* MyApp */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_app_component__["a" /* MyApp */]) === "function" && _e || Object])
     ], RegisterPage);
     return RegisterPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=register.js.map

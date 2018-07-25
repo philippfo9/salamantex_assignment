@@ -512,8 +512,8 @@ var MyApp = /** @class */ (function () {
         ];
         this.pages = this.unauthorizedPages;
         this.userService.loadUserProfile(false).then(function (success) {
-            console.log("callback user profile", success);
             if (success) {
+                _this.isLoggedIn = true;
                 _this.pages = _this.authorizedPages;
                 _this.rootPage = 'UserProfileComponent';
             }
@@ -558,15 +558,15 @@ var MyApp = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */]) === "function" && _a || Object)
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/philipp/Documents/Projects/programs/salamantex_assignment/salamantex_client/src/app/app.html"*/'<ion-split-pane when="lg">\n  <ion-menu [content]="content">\n    <ion-content class="menuContent">\n\n      <ion-grid class="navigationGrid">\n        <ion-row *ngFor="let page of pages">\n          <ion-col col-11 offset-1 class="centeredContent">\n            <p (click)="navigateTo(page)" [class.selected]="page.selected" class="navigationTitle">{{page.title}}</p>\n          </ion-col>\n        </ion-row>\n        <ion-row *ngIf="isLoggedIn">\n          <ion-col col-11 offset-1 class="centeredContent">\n            <p (click)="generatePdf()" class="navigationTitle">Produktübersicht PDF</p>\n          </ion-col>\n        </ion-row>\n        <ion-row *ngIf="isLoggedIn">\n          <ion-col col-11 offset-1>\n            <button ion-button class="standardBtn" (click)="logout()">Logout</button>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n    </ion-content>\n\n  </ion-menu>\n\n  <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n  <ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>\n</ion-split-pane>\n'/*ion-inline-end:"/Users/philipp/Documents/Projects/programs/salamantex_assignment/salamantex_client/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/philipp/Documents/Projects/programs/salamantex_assignment/salamantex_client/src/app/app.html"*/'<ion-split-pane when="lg">\n  <ion-menu [content]="content">\n    <ion-content class="menuContent">\n\n      <ion-grid class="navigationGrid">\n        <ion-row *ngFor="let page of pages">\n          <ion-col col-22 offset-2 class="centeredContent">\n            <p (click)="navigateTo(page)" [class.selected]="page.selected" class="navigationTitle">{{page.title}}</p>\n          </ion-col>\n        </ion-row>\n        <ion-row *ngIf="isLoggedIn">\n          <ion-col col-22 offset-2>\n            <button ion-button class="standardBtn" (click)="logout()">Logout</button>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n    </ion-content>\n\n  </ion-menu>\n\n  <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n  <ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>\n</ion-split-pane>\n'/*ion-inline-end:"/Users/philipp/Documents/Projects/programs/salamantex_assignment/salamantex_client/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_4__providers_app_config_app_config__["a" /* AppConfigProvider */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_user_user__["a" /* UserProvider */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_app_config_app_config__["a" /* AppConfigProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_app_config_app_config__["a" /* AppConfigProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__providers_user_user__["a" /* UserProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_user_user__["a" /* UserProvider */]) === "function" && _f || Object])
     ], MyApp);
     return MyApp;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=app.component.js.map
@@ -998,7 +998,7 @@ var UserProvider = /** @class */ (function () {
                     case 2:
                         success = (_a.login = _b.sent(), _a);
                         return [2 /*return*/, success];
-                    case 3: return [2 /*return*/];
+                    case 3: return [2 /*return*/, false];
                 }
             });
         });
@@ -1033,14 +1033,20 @@ var UserProvider = /** @class */ (function () {
     };
     UserProvider.prototype.updateUser = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var res;
+            var backup, res;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.httpService.postRequest("auth", "/user/" + this.user.id, this.user, false, true)];
+                    case 0:
+                        backup = this.user.backup;
+                        delete this.user.backup;
+                        return [4 /*yield*/, this.httpService.postRequest("auth", "/user/" + this.user.id, this.user, false, true)];
                     case 1:
                         res = _a.sent();
                         if (res && res.success) {
                             return [2 /*return*/, true];
+                        }
+                        else {
+                            this.user.backup = backup;
                         }
                         return [2 /*return*/];
                 }
@@ -1072,9 +1078,10 @@ var UserProvider = /** @class */ (function () {
     };
     UserProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__http_service_http_service__["a" /* HttpServiceProvider */], __WEBPACK_IMPORTED_MODULE_3__auth_auth__["a" /* AuthProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service_http_service__["a" /* HttpServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service_http_service__["a" /* HttpServiceProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__auth_auth__["a" /* AuthProvider */]) === "function" && _b || Object])
     ], UserProvider);
     return UserProvider;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=user.js.map
@@ -1181,7 +1188,7 @@ var HttpServiceProvider = /** @class */ (function () {
                         return [4 /*yield*/, this.http.get(reqPath, __assign({ observe: "response" }, options)).toPromise()
                                 .catch(function (err) {
                                 console.log("err", err);
-                                _this.errorHandler.handle(new __WEBPACK_IMPORTED_MODULE_5__model_CustomError__["a" /* CustomError */]("http", err.error.message, err.status), showError);
+                                _this.errorHandler.handle(new __WEBPACK_IMPORTED_MODULE_5__model_CustomError__["a" /* CustomError */]("http", (err.error) ? err.error.message : "", err.status), showError);
                             })];
                     case 3:
                         res = _a.sent();
@@ -1207,10 +1214,11 @@ var HttpServiceProvider = /** @class */ (function () {
                     case 2:
                         reqPath = this.getBasePath(base) + path;
                         options = this.getOptions(token);
+                        console.log("body", body);
                         return [4 /*yield*/, this.http.post(reqPath, body, __assign({ observe: "response" }, options)).toPromise()
                                 .catch(function (err) {
                                 console.log("err", err);
-                                _this.errorHandler.handle(new __WEBPACK_IMPORTED_MODULE_5__model_CustomError__["a" /* CustomError */]("http", err.error.message, err.status), showError);
+                                _this.errorHandler.handle(new __WEBPACK_IMPORTED_MODULE_5__model_CustomError__["a" /* CustomError */]("http", (err.error) ? err.error.message : "", err.status), showError);
                             })];
                     case 3:
                         res = _a.sent();

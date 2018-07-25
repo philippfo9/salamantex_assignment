@@ -44,6 +44,7 @@ export class UserProvider {
       let success = {register: true, login: await this.login()};
       return success;
     }
+    return false;
   }
 
   async logout() {
@@ -59,9 +60,13 @@ export class UserProvider {
   }
 
   async updateUser() {
+    let backup = this.user.backup;
+    delete this.user.backup;
     let res:ServiceResponse = <ServiceResponse>await this.httpService.postRequest("auth", "/user/"+this.user.id, this.user, false, true);
     if(res && res.success) {
       return true;
+    } else {
+        this.user.backup = backup;
     }
   }
 

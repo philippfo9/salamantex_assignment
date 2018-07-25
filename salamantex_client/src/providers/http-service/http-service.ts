@@ -39,8 +39,8 @@ export class HttpServiceProvider {
 
     let res: Response = <Response>await this.http.get<Response>(reqPath, {observe: "response", ...options}).toPromise()
         .catch( err => {
-          console.log("err", err);
-          this.errorHandler.handle(new CustomError("http", err.error.message, err.status), showError);
+            console.log("err", err);
+          this.errorHandler.handle(new CustomError("http", (err.error)?err.error.message:"", err.status), showError);
         });
 
     return this.handleResponse(res, showError);
@@ -56,10 +56,12 @@ export class HttpServiceProvider {
 
     let options = this.getOptions(token);
 
+    console.log("body", body);
+
     let res: Response = <Response>await this.http.post<Response>(reqPath, body, {observe: "response", ...options}).toPromise()
       .catch(err => {
         console.log("err", err);
-        this.errorHandler.handle(new CustomError("http", err.error.message, err.status), showError);
+        this.errorHandler.handle(new CustomError("http", (err.error)?err.error.message:"", err.status), showError);
       });
 
     return this.handleResponse(res, showError);

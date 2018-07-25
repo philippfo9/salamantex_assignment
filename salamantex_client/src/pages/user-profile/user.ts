@@ -16,10 +16,8 @@ export class UserProfileComponent {
 	UserForm: FormGroup;
 
 	editMode = false;
-
 	constructor(public formBuilder: FormBuilder, public userService: UserProvider, public myApp: MyApp) {
-    console.log("hey");
-    this.UserForm = this.formBuilder.group({
+    	this.UserForm = this.formBuilder.group({
 			publicIdentifier: ['', Validators.compose([Validators.required])],
 			email: ['', Validators.compose([Validators.required])],
 			name: ['', Validators.compose([Validators.required])],
@@ -39,22 +37,19 @@ export class UserProfileComponent {
   }
 
   cancelEditMode() {
-	  this.editMode = false;
 	  this.userService.cancelEdit();
   }
 
   async saveUpdates() {
     let success = await this.userService.updateUser();
     if(!success) {
-      this.cancelEditMode();
+        this.editMode = false;
     }
   }
 
-	ionViewDidLoad() {
-    this.userService.loadUserProfile(true);
-  }
 
   ionViewDidEnter() {
     this.myApp.setPageActive("UserProfileComponent");
+      this.userService.loadUserProfile(true);
   }
 }

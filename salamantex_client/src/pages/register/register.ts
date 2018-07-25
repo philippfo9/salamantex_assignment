@@ -32,7 +32,8 @@ export class RegisterPage {
 
   async register() {
     let success: any = await this.userService.register();
-    if(success.register) {
+    console.log(success);
+    if(success && success.register) {
       if(success.login) {
         this.navCtrl.push("UserProfileComponent");
       } else {

@@ -46,8 +46,8 @@ export class MyApp {
     ];
     this.pages = this.unauthorizedPages;
     this.userService.loadUserProfile(false).then(success => {
-      console.log("callback user profile", success);
       if(success) {
+        this.isLoggedIn = true;
         this.pages = this.authorizedPages;
         this.rootPage = 'UserProfileComponent';
       } else {
@@ -61,7 +61,6 @@ export class MyApp {
       if(p == page) {
         p.selected = true;
         this.nav.setRoot(p.component);
-
       } else {
         p.selected = false;
       }

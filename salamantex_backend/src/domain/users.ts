@@ -39,11 +39,11 @@ export class UsersDomain {
         if(!user.password)
             throw new CustomError(422, "Für die Registrierung wird ein Passwort benötigt");
 
-        if(User.findOne({email: user.email})) {
+        if(await User.findOne({email: user.email})) {
             throw new CustomError(422, "Email existiert bereits");
         }
 
-        if(User.findOne({name: user.name})) {
+        if(await User.findOne({name: user.name})) {
             throw new CustomError(422, "Username existiert bereits");
         }
 
